@@ -43,7 +43,7 @@ public class ServerRepository {
 	 * @return A list that may be empty
 	 */
 	public Observable<List<GithubTrending>> getTrending() {
-		return createRetrofit("https://github-trending-api.now.sh")
+		return createRetrofit("https://github-trending-api.now.sh/")
 				.create(ServerApi.class)
 				.getTrendingRepos()
 				.observeOn(AndroidSchedulers.mainThread())
