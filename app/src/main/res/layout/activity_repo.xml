@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.view.View"/>
+
+        <variable
+            name="viewModel"
+            type="com.cjvilla.trending.model.GithubRepo"/>
+
+        <variable
+            name="ownerModel"
+            type="com.cjvilla.trending.model.GithubPerson"/>
+
+    </data>
+
+    <android.support.design.widget.CoordinatorLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fitsSystemWindows="true">
+
+        <android.support.design.widget.AppBarLayout
+            android:id="@+id/app_bar_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+            android:fitsSystemWindows="true">
+
+            <android.support.design.widget.CollapsingToolbarLayout
+                android:id="@+id/collapsingToolbar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_scrollFlags="scroll|exitUntilCollapsed"
+                app:expandedTitleMarginStart="48dp"
+                app:expandedTitleMarginEnd="64dp">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingTop="?android:attr/actionBarSize"
+                    >
+
+                    <android.support.v7.widget.CardView
+                        android:id="@+id/cardImage"
+                        android:layout_width="150dp"
+                        android:layout_height="150dp"
+                        android:fitsSystemWindows="true"
+                        android:transitionName="@string/transition"
+                        android:elevation="12dp"
+                        android:layout_centerHorizontal="true"
+                        app:cardCornerRadius="75dp"
+                        android:layout_gravity="center_horizontal"
+                        android:innerRadius="0dp"
+                        android:shape="ring"
+                        android:thicknessRatio="1.9">
+
+                        <ImageView
+                            android:id="@+id/image"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:scaleType="centerCrop"
+                            app:imageUrl="@{ownerModel.avatar_url}"
+                            app:layout_collapseMode="parallax"/>
+                    </android.support.v7.widget.CardView>
+
+                    <android.support.v7.widget.AppCompatTextView
+                        android:id="@+id/repo"
+                        tools:text="person"
+                        android:text="@{viewModel.full_name}"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_horizontal"
+                        android:layout_below="@+id/cardImage"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Headline"
+                        />
+
+                    <android.support.v7.widget.AppCompatTextView
+                        android:id="@+id/description"
+                        tools:text="Desc"
+                        android:text='@{viewModel.description}'
+                        android:visibility="@{viewModel.description!=null ? View.VISIBLE : View.GONE}"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_horizontal"
+                        android:layout_below="@+id/repo"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                        />
+
+                    <LinearLayout
+                        android:id="@+id/repoValues"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_below="@+id/description"
+                        android:layout_marginTop="20dp"
+                        android:weightSum="2">
+
+                        <android.support.v7.widget.AppCompatTextView
+                            android:id="@+id/stars"
+                            tools:text="12"
+                            android:text="@{Integer.toString(viewModel.stargazers_count)}"
+                            android:layout_weight="1"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:gravity="center_horizontal"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Headline"
+                            />
+
+                        <android.support.v7.widget.AppCompatTextView
+                            android:id="@+id/issues"
+                            tools:text="12"
+                            android:text="@{Integer.toString(viewModel.open_issues)}"
+                            android:layout_weight="1"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:gravity="center_horizontal"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Headline"
+                            />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_below="@+id/repoValues"
+                        android:layout_marginBottom="20dp"
+                        android:weightSum="2">
+
+                        <android.support.v7.widget.AppCompatTextView
+                            android:id="@+id/st"
+                            android:text="@string/stargazers"
+                            android:layout_weight="1"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:gravity="center_horizontal"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                            />
+
+                        <android.support.v7.widget.AppCompatTextView
+                            android:id="@+id/is"
+                            android:text="@string/open_issues"
+                            android:layout_weight="1"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:gravity="center_horizontal"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                            />
+
+                        <android.support.v7.widget.AppCompatTextView
+                            android:id="@+id/repositoriesLabel"
+
+                            android:layout_weight="1"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:gravity="center_horizontal"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                            />
+                    </LinearLayout>
+                </RelativeLayout>
+
+                <android.support.v7.widget.Toolbar
+                    android:id="@+id/toolbar"
+                    android:layout_width="match_parent"
+                    android:layout_height="?android:attr/actionBarSize"
+                    app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+                    app:layout_collapseMode="pin"/>
+
+            </android.support.design.widget.CollapsingToolbarLayout>
+
+        </android.support.design.widget.AppBarLayout>
+
+        <android.support.v4.widget.NestedScrollView
+            android:id="@+id/scroll"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:clipToPadding="false"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:orientation="vertical">
+
+                <android.support.v7.widget.AppCompatTextView
+                    android:id="@+id/url"
+                    android:text="@{viewModel.html_url}"
+                    android:layout_margin="5dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_horizontal"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Headline"
+                    />
+
+            </LinearLayout>
+        </android.support.v4.widget.NestedScrollView>
+
+        <ProgressBar
+            android:id="@+id/progress"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:layout_gravity="center"
+            android:visibility="gone"
+            tools:visibility="gone"/>
+    </android.support.design.widget.CoordinatorLayout>
+</layout>
