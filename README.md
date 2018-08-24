@@ -1,4 +1,6 @@
 # Trending
-Sample app to display trending Github repos
+This app was written to display "trending" Github repos. There is no "trending" endpoint in the Github API, so we used:
 
-Demonstrates retrieval using Retrofit2.
+https://github.com/huchenme/github-trending-api
+
+Demonstrates retrieval using Retrofit2 and RxJava.
