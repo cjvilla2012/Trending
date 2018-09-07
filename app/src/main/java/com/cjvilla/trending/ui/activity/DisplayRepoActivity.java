@@ -30,13 +30,16 @@ public class DisplayRepoActivity extends BaseTrendingActivity implements Contrac
 		ActivityCompat.startActivity(activity, intent, options.toBundle());
 	}
 
-
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		binding = DataBindingUtil.setContentView(this, R.layout.activity_repo);
 		super.onCreate(savedInstanceState);
 		createToolbar(true);
 		showTitle(null);
+		getRepo();
+	}
+
+	protected void getRepo() {
 		displayRepoPresenter=new DisplayRepoPresenter();
 		displayRepoPresenter.attach(this);
 		GithubTrending trending=Parcels.unwrap(getIntent().getParcelableExtra(KEY_TRENDING));
@@ -51,11 +54,15 @@ public class DisplayRepoActivity extends BaseTrendingActivity implements Contrac
 		binding.setOwnerModel(repo.getOwner());
 	}
 
+	protected void detach() {
+		displayRepoPresenter.detach();
+	}
+
 	@Override
 	public void onStop() {
 		super.onStop();
 		showProgress(false);
-		displayRepoPresenter.detach();
+		detach();
 	}
 
 	private void showProgress(boolean show) {

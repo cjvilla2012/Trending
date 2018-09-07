@@ -6,12 +6,13 @@ import io.reactivex.disposables.CompositeDisposable;
 import timber.log.Timber;
 
 public class MainActivityPresenter implements Contract.TrendingPresenter {
-	private CompositeDisposable compositeDisposable;
+	protected CompositeDisposable compositeDisposable;
 	private ServerRepository serverRepository;
 	private Contract.TrendingView trendingView;
 
-	public void attach(Contract.TrendingView view) {
-		this.trendingView=view;
+	@Override
+	public void attach(BaseView view) {
+		this.trendingView = (Contract.TrendingView) view;
 		compositeDisposable=new CompositeDisposable();
 		serverRepository = ServerRepository.instance();
 		loadTrending();

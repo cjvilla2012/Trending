@@ -10,8 +10,9 @@ public class DisplayRepoPresenter implements Contract.RepoPresenter {
 	private ServerRepository serverRepository;
 	private Contract.RepoView repoView;
 
-	public void attach(Contract.RepoView view) {
-		this.repoView=view;
+	@Override
+	public void attach(BaseView view) {
+		this.repoView = (Contract.RepoView) view;
 		compositeDisposable=new CompositeDisposable();
 		serverRepository = ServerRepository.instance();
 	}

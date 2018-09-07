@@ -1,6 +1,7 @@
 <resources>
 
-    <!-- Base application theme. -->
+    <!-- Base application theme. Configure the style attributes in each flavor by
+        specifying values in the referenced values XML. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="android:fontFamily">@string/font_family</item>
         <item name="colorPrimary">@color/colorPrimary</item>

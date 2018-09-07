@@ -6,20 +6,20 @@ import com.cjvilla.trending.model.GithubTrending;
 import java.util.List;
 
 public interface Contract {
-	interface TrendingView  {
+	interface TrendingView extends BaseView {
 		void displayTrending(List<GithubTrending> trending);
 	}
 
-	interface TrendingPresenter {
+	interface TrendingPresenter extends BasePresenter {
 		void loadTrending();
 
 	}
 
-	interface RepoView  {
+	interface RepoView extends BaseView {
 		void displayRepo(GithubRepo repo);
 	}
 
-	interface RepoPresenter {
+	interface RepoPresenter extends BasePresenter {
 		void loadRepo(String owner, String name);
 
 	}
