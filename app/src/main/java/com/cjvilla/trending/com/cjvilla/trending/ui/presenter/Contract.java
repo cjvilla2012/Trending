@@ -11,7 +11,6 @@ public interface Contract {
 	}
 
 	interface TrendingPresenter {
-
 		void loadTrending();
 
 	}
@@ -21,8 +20,7 @@ public interface Contract {
 	}
 
 	interface RepoPresenter {
-
-		void loadRepo(String owner,String name);
+		void loadRepo(String owner, String name);
 
 	}
 

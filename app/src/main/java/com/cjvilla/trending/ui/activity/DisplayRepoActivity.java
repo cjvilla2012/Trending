@@ -40,14 +40,29 @@ public class DisplayRepoActivity extends BaseTrendingActivity implements Contrac
 		displayRepoPresenter=new DisplayRepoPresenter();
 		displayRepoPresenter.attach(this);
 		GithubTrending trending=Parcels.unwrap(getIntent().getParcelableExtra(KEY_TRENDING));
-		binding.progress.setVisibility(View.VISIBLE);
+		showProgress(true);
 		displayRepoPresenter.loadRepo(trending.getAuthor(),trending.getName());
 	}
 
 	@Override
 	public void displayRepo(GithubRepo repo) {
-		binding.progress.setVisibility(View.GONE);
+		showProgress(false);
 		binding.setViewModel(repo);
 		binding.setOwnerModel(repo.getOwner());
+	}
+
+	@Override
+	public void onStop() {
+		super.onStop();
+		showProgress(false);
+		displayRepoPresenter.detach();
+	}
+
+	private void showProgress(boolean show) {
+		if (show) {
+			binding.progress.setVisibility(View.VISIBLE);
+		} else {
+			binding.progress.setVisibility(View.GONE);
+		}
 	}
 }

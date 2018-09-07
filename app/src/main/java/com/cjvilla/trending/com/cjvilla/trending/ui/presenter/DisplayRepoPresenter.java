@@ -19,7 +19,6 @@ public class DisplayRepoPresenter implements Contract.RepoPresenter {
 	public void detach() {
 		if (compositeDisposable!=null) {
 			compositeDisposable.clear();
-			compositeDisposable=null;
 		}
 	}
 

@@ -14,14 +14,36 @@ android {
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
-        release {
+        debug {
             minifyEnabled false
+            applicationIdSuffix ".debug"
+        }
+        release {
+            shrinkResources true
+            minifyEnabled true
+            //Note that the default file lives in the sdk directory, whereas the
+            //custom file lives in the project
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
+    }
+    flavorDimensions "ui"
+    productFlavors {
+        business {
+            dimension "ui"
+            applicationId "com.cjvilla.trending.business"
+            versionName "1.0"
+            versionCode 1
+        }
+        personal {
+            dimension "ui"
+            applicationId "com.cjvilla.trending.personal"
+            versionName "2.0"
+            versionCode 23
+        }
     }
 }
 

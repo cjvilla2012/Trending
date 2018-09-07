@@ -43,8 +43,9 @@ public class MainActivity extends BaseTrendingActivity implements Contract.Trend
 	}
 
 	@Override
-	public void onDestroy() {
-		super.onDestroy();
+	public void onStop() {
+		super.onStop();
+		showProgress(false);
 		presenter.detach();
 	}
 
