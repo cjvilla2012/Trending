@@ -7,12 +7,17 @@ import org.parceler.Parcel;
 @Parcel
 public class GithubRepo extends BaseObservable {
 	//Fields are declared protected to avoid Reflection with Parcels
+	protected String name;
 	protected String full_name;
 	protected String html_url;
 	protected String description;
 	protected int stargazers_count;
 	protected int open_issues;
 	protected GithubPerson owner;
+
+	public String getName() {
+		return name;
+	}
 
 	public String getFull_name() {
 		return full_name;

@@ -1,0 +1,10 @@
+<!--
+  ~ Copyright (c) 2018 CJ Villa. All rights reserved
+  -->
+<resources>
+    <string name="app_name">Business</string>
+    <string name="font_family">sans-serif-medium</string>
+    <string name="search">Search</string>
+    <string name="fmt_home">Home: %s</string>
+    <string name="search_hint">Enter a Github username</string>
+</resources>

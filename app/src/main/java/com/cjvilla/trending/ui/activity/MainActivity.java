@@ -1,5 +1,6 @@
 package com.cjvilla.trending.ui.activity;
 
+import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -16,21 +17,18 @@ import com.cjvilla.trending.model.VMHandlers;
 import com.xwray.groupie.GroupAdapter;
 import com.xwray.groupie.databinding.BindableItem;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /** Displays a list of trending repos as a 2-column Grid.*/
 public class MainActivity extends BaseTrendingActivity implements Contract.TrendingView {
-	private ActivityMainBinding binding;
-	private GroupAdapter groupAdapter = new GroupAdapter();
-	private List<GithubTrending> items = new ArrayList<>();
+	protected ActivityMainBinding binding;
+	protected GroupAdapter groupAdapter = new GroupAdapter();
 	private MainActivityPresenter presenter=new MainActivityPresenter();
 
 	@Override
 	public void displayTrending(List<GithubTrending> items) {
 		showProgress(false);
-		this.items = items;
-		initRecyclerView();
+		initRecyclerView(items);
 	}
 
 	@Override
@@ -38,17 +36,23 @@ public class MainActivity extends BaseTrendingActivity implements Contract.Trend
 		binding = DataBindingUtil.setContentView(this, R.layout.activity_main);
 		super.onCreate(savedInstanceState);
 		createToolbar(false);
+		onNewIntent(getIntent());
+	}
+
+	@Override
+	public void onNewIntent(Intent intent) {
 		showProgress(true);
 		presenter.attach(this);
 	}
 
 	@Override
-	public void onDestroy() {
-		super.onDestroy();
+	public void onStop() {
+		super.onStop();
+		showProgress(false);
 		presenter.detach();
 	}
 
-	private void initRecyclerView() {
+	private void initRecyclerView(List<GithubTrending> items) {
 		binding.recycler.setAdapter(groupAdapter);
 		binding.recycler.setLayoutManager(new GridLayoutManager(this, 2));
 		groupAdapter.clear();
@@ -57,7 +61,7 @@ public class MainActivity extends BaseTrendingActivity implements Contract.Trend
 		}
 	}
 
-	private void showProgress(boolean show) {
+	protected void showProgress(boolean show) {
 		if (show) {
 			binding.recycler.setVisibility(View.GONE);
 			binding.progress.setVisibility(View.VISIBLE);

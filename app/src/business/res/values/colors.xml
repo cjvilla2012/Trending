@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright (c) 2018 CJ Villa. All rights reserved
+  -->
+
+<resources>
+    <color name="colorPrimary">#64ba69</color>
+    <color name="colorPrimaryDark">#31893d</color>
+    <color name="colorAccent">#ffff81</color>
+</resources>

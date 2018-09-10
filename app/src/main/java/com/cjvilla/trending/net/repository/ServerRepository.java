@@ -54,7 +54,7 @@ public class ServerRepository {
 	 * Create a simple Retrofit with no base endpoint
 	 * @return
 	 */
-	private Retrofit createRetrofit(String baseUrl) {
+	public static Retrofit createRetrofit(String baseUrl) {
 		return new Retrofit.Builder()
 				.addConverterFactory(GsonConverterFactory.create())
 				.addCallAdapterFactory(RxJava2CallAdapterFactory.create())
