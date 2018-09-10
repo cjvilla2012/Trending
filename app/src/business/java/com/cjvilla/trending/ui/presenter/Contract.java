@@ -4,6 +4,7 @@
 
 package com.cjvilla.trending.ui.presenter;
 
+import com.cjvilla.trending.com.cjvilla.trending.ui.presenter.BasePresenter;
 import com.cjvilla.trending.model.GithubRepo;
 
 import java.util.List;
@@ -13,7 +14,7 @@ public interface Contract {
 		void displayRepos(List<GithubRepo> repos);
 	}
 
-	interface ReposPresenter {
+	interface ReposPresenter extends BasePresenter {
 		void loadRepos(String githubId);
 
 	}

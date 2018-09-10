@@ -8,6 +8,9 @@ import android.app.SearchManager;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.GridLayoutManager;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 
 import com.cjvilla.trending.R;
 import com.cjvilla.trending.databinding.ViewRepoBinding;
@@ -33,11 +36,29 @@ public class BusinessMainActivity extends MainActivity implements Contract.Repos
 	public void onNewIntent(Intent intent) {
 		if (Intent.ACTION_SEARCH.equals(intent.getAction())) {
 			String query = intent.getStringExtra(SearchManager.QUERY);
-			//performSearch(query);
+			performSearch(query);
 		} else {
-			showProgress(true);
 			presenter.attach(this);
-			presenter.loadRepos(DEFAULT_GITHUB_ID);
+			performSearch(DEFAULT_GITHUB_ID);
+		}
+	}
+
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		MenuInflater inflater = getMenuInflater();
+		inflater.inflate(R.menu.menu_main, menu);
+		return true;
+	}
+
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		int itemId = item.getItemId();
+		switch (itemId) {
+			case R.id.action_search:
+				onSearchRequested();
+				return true;
+			default:
+				return super.onOptionsItemSelected(item);
 		}
 	}
 
@@ -61,6 +82,12 @@ public class BusinessMainActivity extends MainActivity implements Contract.Repos
 		for (GithubRepo repo : items) {
 			groupAdapter.add(new RepoItem(repo));
 		}
+	}
+
+	private void performSearch(String person) {
+		showTitle(String.format(getString(R.string.fmt_home), person));
+		showProgress(true);
+		presenter.loadRepos(person);
 	}
 
 	private class RepoItem extends BindableItem<ViewRepoBinding> {

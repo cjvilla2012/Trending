@@ -7,4 +7,6 @@ package com.cjvilla.trending.com.cjvilla.trending.ui.presenter;
 public interface BasePresenter {
 
 	void attach(BaseView baseView);
+
+	void detach();
 }

@@ -13,11 +13,11 @@ public class MainActivityPresenter implements Contract.TrendingPresenter {
 	@Override
 	public void attach(BaseView view) {
 		this.trendingView = (Contract.TrendingView) view;
-		compositeDisposable=new CompositeDisposable();
 		serverRepository = ServerRepository.instance();
 		loadTrending();
 	}
 
+	@Override
 	public void detach() {
 		if (compositeDisposable!=null) {
 			compositeDisposable.clear();
@@ -27,6 +27,9 @@ public class MainActivityPresenter implements Contract.TrendingPresenter {
 
 	@Override
 	public void loadTrending() {
+		if (compositeDisposable == null) {
+			compositeDisposable = new CompositeDisposable();
+		}
 		compositeDisposable.add(serverRepository.getTrending()
 				.subscribe(
 						trendings -> {
